@@ -3,7 +3,7 @@ from math import floor
 from record import get_record, is_empty, set_record
 
 def fill_records():
-    n = 100
+    n = 200
     while n > 0:
         n -= 1
         x = random.uniform(0, 10);
@@ -13,11 +13,11 @@ def fill_records():
     
 def make_decision():
     # from -90 to 90
-    max_lat = 10
-    min_lat = 0
+    max_lat = 38
+    min_lat = 35
     # from 0 to 180
-    max_long = 10
-    min_long = 0
+    max_long = 56
+    min_long = 53
 
     grid_lat_size = 10
     grid_long_size = 10
@@ -26,8 +26,8 @@ def make_decision():
 
     map_data = [[[] for x in range(grid_lat_size)] for x in range(grid_long_size)]
 
-    fill_records()
-
+    #fill_records()
+    
     while not is_empty():
         rec = get_record()
         x = rec.latitude
@@ -35,6 +35,10 @@ def make_decision():
         i = int(floor((x - min_lat) / step_lat))
         j = int(floor((y - min_long) / step_long))
         map_data[i][j].append(rec)
-        print(map_data[i][j][0].latitude)
+        if (len(map_data[i][j]) > 5):
+            print(i, j, "interesting!")
+               
+#make_decision()
 
-make_decision()
+
+
