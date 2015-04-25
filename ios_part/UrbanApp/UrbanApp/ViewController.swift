@@ -13,8 +13,29 @@ let UAMetersPerLine: Double = 100000
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var mapView: MKMapView!
-    var locationManager = CLLocationManager()
     var pins = [Pin]()
+    var locationManager = CLLocationManager()
+    var centeredAtUsersLocation = false
+    
+    func checkLocationAuthorizationStatus() {
+        if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
+            mapView.showsUserLocation = true
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        var locValue:CLLocationCoordinate2D = manager.location.coordinate
+        if (!centeredAtUsersLocation) {
+            println("locations = \(locValue.latitude) \(locValue.longitude)")
+            let zoomLocation = CLLocationCoordinate2D(latitude: locValue.latitude, longitude: locValue.longitude)
+            
+            let viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5 * UAMetersPerLine, 0.5 * UAMetersPerLine);
+            mapView.setRegion(viewRegion, animated: true)
+            centeredAtUsersLocation = true
+        }
+    }
     
     func loadInitialData() {
 //        var URL = NSURL(string: "http://10.80.7.23:80/")
@@ -54,21 +75,33 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         task.resume()
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         loadInitialData()
+        
+        checkLocationAuthorizationStatus()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //Moscow
-//        var zoomLocation = CLLocationCoordinate2D(latitude: 55.75, longitude: 37.616667)
+//        var zoomLocation = CLLocationCoordinate2D(latitude: 55.7408709621946, longitude: 37.6100187177399)
         //example city Honolulu with red points
         let zoomLocation = CLLocationCoordinate2D(latitude: 21.282778, longitude: -157.829444)
         
         let viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5 * UAMetersPerLine, 0.5 * UAMetersPerLine);
         mapView.setRegion(viewRegion, animated: true)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
 
 }
