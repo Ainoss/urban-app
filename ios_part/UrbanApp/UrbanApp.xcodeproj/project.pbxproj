@@ -13,6 +13,11 @@
 		6D3E8AE01AEB9FA200006220 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D3E8ADF1AEB9FA200006220 /* Images.xcassets */; };
 		6D3E8AE31AEB9FA200006220 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3E8AE11AEB9FA200006220 /* LaunchScreen.xib */; };
 		6D3E8AEF1AEB9FA200006220 /* UrbanAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E8AEE1AEB9FA200006220 /* UrbanAppTests.swift */; };
+		6D3E8AF91AEBA12C00006220 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3E8AF81AEBA12C00006220 /* MapKit.framework */; };
+		6D3E8AFB1AEBB6D300006220 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E8AFA1AEBB6D300006220 /* VCMapView.swift */; };
+		6D3E8AFF1AEBB9E500006220 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E8AFE1AEBB9E500006220 /* JSON.swift */; };
+		6D3E8B011AEBBA2900006220 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E8B001AEBBA2900006220 /* Pin.swift */; };
+		6D3E8B031AEBBB8F00006220 /* PublicArt.json in Resources */ = {isa = PBXBuildFile; fileRef = 6D3E8B021AEBBB8F00006220 /* PublicArt.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,11 @@
 		6D3E8AE81AEB9FA200006220 /* UrbanAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UrbanAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D3E8AED1AEB9FA200006220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D3E8AEE1AEB9FA200006220 /* UrbanAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrbanAppTests.swift; sourceTree = "<group>"; };
+		6D3E8AF81AEBA12C00006220 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6D3E8AFA1AEBB6D300006220 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
+		6D3E8AFE1AEBB9E500006220 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		6D3E8B001AEBBA2900006220 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
+		6D3E8B021AEBBB8F00006220 /* PublicArt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PublicArt.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D3E8AF91AEBA12C00006220 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +70,7 @@
 		6D3E8ACA1AEB9FA200006220 = {
 			isa = PBXGroup;
 			children = (
+				6D3E8AF81AEBA12C00006220 /* MapKit.framework */,
 				6D3E8AD51AEB9FA200006220 /* UrbanApp */,
 				6D3E8AEB1AEB9FA200006220 /* UrbanAppTests */,
 				6D3E8AD41AEB9FA200006220 /* Products */,
@@ -79,6 +91,9 @@
 			children = (
 				6D3E8AD81AEB9FA200006220 /* AppDelegate.swift */,
 				6D3E8ADA1AEB9FA200006220 /* ViewController.swift */,
+				6D3E8B001AEBBA2900006220 /* Pin.swift */,
+				6D3E8AFA1AEBB6D300006220 /* VCMapView.swift */,
+				6D3E8AFE1AEBB9E500006220 /* JSON.swift */,
 				6D3E8ADC1AEB9FA200006220 /* Main.storyboard */,
 				6D3E8ADF1AEB9FA200006220 /* Images.xcassets */,
 				6D3E8AE11AEB9FA200006220 /* LaunchScreen.xib */,
@@ -90,6 +105,7 @@
 		6D3E8AD61AEB9FA200006220 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6D3E8B021AEBBB8F00006220 /* PublicArt.json */,
 				6D3E8AD71AEB9FA200006220 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -192,6 +208,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D3E8B031AEBBB8F00006220 /* PublicArt.json in Resources */,
 				6D3E8ADE1AEB9FA200006220 /* Main.storyboard in Resources */,
 				6D3E8AE31AEB9FA200006220 /* LaunchScreen.xib in Resources */,
 				6D3E8AE01AEB9FA200006220 /* Images.xcassets in Resources */,
@@ -212,8 +229,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D3E8B011AEBBA2900006220 /* Pin.swift in Sources */,
+				6D3E8AFB1AEBB6D300006220 /* VCMapView.swift in Sources */,
 				6D3E8ADB1AEB9FA200006220 /* ViewController.swift in Sources */,
 				6D3E8AD91AEB9FA200006220 /* AppDelegate.swift in Sources */,
+				6D3E8AFF1AEBB9E500006220 /* JSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
