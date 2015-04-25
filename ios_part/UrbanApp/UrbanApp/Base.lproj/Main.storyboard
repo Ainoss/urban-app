@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="UrbanApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,8 +16,42 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYh-Lm-R0m">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="gYh-Lm-R0m" secondAttribute="trailing" constant="-16" id="ArO-es-fLM"/>
+                            <constraint firstItem="gYh-Lm-R0m" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="CAU-aI-dxW"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gYh-Lm-R0m" secondAttribute="bottom" id="Dba-MF-7G6"/>
+                            <constraint firstItem="gYh-Lm-R0m" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="Fl1-hY-MNY"/>
+                            <constraint firstItem="gYh-Lm-R0m" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="K64-Pi-X0b"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gYh-Lm-R0m" secondAttribute="bottom" id="KJi-Kz-SsA"/>
+                            <constraint firstItem="gYh-Lm-R0m" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="MOd-cs-Yta"/>
+                            <constraint firstItem="gYh-Lm-R0m" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="TtH-Wp-G2M"/>
+                            <constraint firstItem="gYh-Lm-R0m" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="dKV-Qx-6UM"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gYh-Lm-R0m" secondAttribute="bottom" id="hJz-OB-QYc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gYh-Lm-R0m" secondAttribute="trailing" constant="-16" id="jZQ-xB-MRi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gYh-Lm-R0m" secondAttribute="trailing" id="nXj-QW-uja"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ArO-es-fLM"/>
+                                <exclude reference="CAU-aI-dxW"/>
+                                <exclude reference="MOd-cs-Yta"/>
+                                <exclude reference="TtH-Wp-G2M"/>
+                                <exclude reference="dKV-Qx-6UM"/>
+                                <exclude reference="nXj-QW-uja"/>
+                                <exclude reference="Dba-MF-7G6"/>
+                                <exclude reference="hJz-OB-QYc"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="gYh-Lm-R0m" id="trD-gt-f2l"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
