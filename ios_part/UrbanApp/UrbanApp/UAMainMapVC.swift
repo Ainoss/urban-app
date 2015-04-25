@@ -12,6 +12,10 @@ let UAMetersPerLine: Double = 100000
 
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
+    var chosenAnnotation: Pin!
+
+    @IBAction func unwindToMainMapVC(sender: UIStoryboardSegue) {
+    }
     @IBOutlet weak var mapView: MKMapView!
     var pins = [Pin]()
     var locationManager = CLLocationManager()
@@ -104,5 +108,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidAppear(animated)
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showPinInformation" {
+            var DestVC = segue.destinationViewController as! UAPinInfoVC
+            DestVC.annotation = chosenAnnotation
+        }
+    }
 }
 

@@ -11,7 +11,6 @@ import Foundation
 import MapKit
 
 extension ViewController: MKMapViewDelegate {
-    
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         if let annotation = annotation as? Pin {
             let identifier = "pin"
@@ -30,5 +29,17 @@ extension ViewController: MKMapViewDelegate {
             return view
         }
         return nil
+    }
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!,
+        calloutAccessoryControlTapped control: UIControl!) {
+            let location = view.annotation as! Pin
+            chosenAnnotation = location
+            let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+            performSegueWithIdentifier("showPinInformation", sender: nil)
+//            showPinInformation
+//            location.mapItem().openInMapsWithLaunchOptions(launchOptions)
+            
+            
     }
 }
