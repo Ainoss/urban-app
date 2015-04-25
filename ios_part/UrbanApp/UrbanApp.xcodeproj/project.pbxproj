@@ -18,6 +18,7 @@
 		6D3E8AFF1AEBB9E500006220 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E8AFE1AEBB9E500006220 /* JSON.swift */; };
 		6D3E8B011AEBBA2900006220 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E8B001AEBBA2900006220 /* Pin.swift */; };
 		6D3E8B031AEBBB8F00006220 /* PublicArt.json in Resources */ = {isa = PBXBuildFile; fileRef = 6D3E8B021AEBBB8F00006220 /* PublicArt.json */; };
+		6D3E8B051AEBFB6500006220 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3E8B041AEBFB6500006220 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		6D3E8AFE1AEBB9E500006220 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		6D3E8B001AEBBA2900006220 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		6D3E8B021AEBBB8F00006220 /* PublicArt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PublicArt.json; sourceTree = "<group>"; };
+		6D3E8B041AEBFB6500006220 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D3E8B051AEBFB6500006220 /* CoreLocation.framework in Frameworks */,
 				6D3E8AF91AEBA12C00006220 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,6 +73,7 @@
 		6D3E8ACA1AEB9FA200006220 = {
 			isa = PBXGroup;
 			children = (
+				6D3E8B041AEBFB6500006220 /* CoreLocation.framework */,
 				6D3E8AF81AEBA12C00006220 /* MapKit.framework */,
 				6D3E8AD51AEB9FA200006220 /* UrbanApp */,
 				6D3E8AEB1AEB9FA200006220 /* UrbanAppTests */,
@@ -431,6 +435,7 @@
 				6D3E8AF41AEB9FA200006220 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D3E8AF51AEB9FA200006220 /* Build configuration list for PBXNativeTarget "UrbanAppTests" */ = {
 			isa = XCConfigurationList;
@@ -439,6 +444,7 @@
 				6D3E8AF71AEB9FA200006220 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
