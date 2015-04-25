@@ -19,17 +19,12 @@ mydict = [{"dsad":5},{"fdsadf":4},{"dd":33}]
 
 array = []
 array.append({
-"longitude":"53.0",
-"latitude":"35.6",
-"messages":"Valera1",
+"longitude":"37.6",
+"latitude":"55.7",
+"messages":["Valera1","vlera2","ds","ssddddddddddddddd"],
 "size":6
 })
-array.append({
-"longitude":"56.0",
-"latitude":"36.6",
-"messages":"Valera3",
-"size":7
-})
+
 data_to_send = {"data": array}
 data_to_send = json.dumps( data_to_send )
 data_to_send = data_to_send + ' \n'
