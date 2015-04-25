@@ -1,24 +1,28 @@
-from Queue import Queue 
+from time import time 
 
 class Record:
-    def __init__(self, x, y, m):
+    def __init__(self, x, y, m, t):
         self.latitude = x
         self.longitude = y
         self.message = m
+        self.time = t
 
-records = Queue()
+records = []
 
+def set_record(latitude, longitude, message, time):
+    records.append(Record(latitude, longitude, message, time))
 
-def set_record(latitude, longitude, message):
-    records.put(Record(latitude, longitude, message))
+def get_records():
+    return records
 
-def get_record():
-    return records.get()
+def ramove_old_records():
+    old_time = 300
+    num = 0
+    curr_time = time()
+    while curr_time - records[num].time > old_time:
+        num += 1
+    records = records[num:]
 
-def delete_records_older_then_sec():
-
-def is_empty():
-    return records.empty()
 
 
 
