@@ -15,6 +15,7 @@ class Pin: NSObject, MKAnnotation {
     var subtitle: String
     let locationName: String
     let locationSize: Int
+    let pinColor: MKPinAnnotationColor = .Red
     
     var messages = [String]()
     
