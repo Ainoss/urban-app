@@ -16,6 +16,7 @@ class Pin: NSObject, MKAnnotation {
     let locationName: String
     let locationSize: Int
     let pinColor: MKPinAnnotationColor = .Red
+    var paths = [String]()
     
     var messages = [String]()
     
@@ -31,15 +32,31 @@ class Pin: NSObject, MKAnnotation {
     
     init(json: JSONValue) {
         title = "Tweets"
-        subtitle = json["messages"]!.array![0].string!
         locationName = title
         locationSize = json["size"]!.integer!
         let longitude = (json["longitude"]!.string! as NSString).doubleValue
         let latitude = (json["latitude"]!.string! as NSString).doubleValue
         coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         var messagesData = json["messages"]!.array!
+        var cnt: Int = 0
         for msg in messagesData {
-            messages.append(msg.string!)
+            if (cnt % 2) == 0 {
+                messages.append(msg.string!)
+                println(msg.string!)
+            }
+            else {
+                paths.append(msg.string!)
+                println(msg.string!)
+            }
+            cnt++
+        }
+        if messages.count > 0{
+            subtitle = json["messages"]!.array![0].string!
+            
+        }
+        else {
+            subtitle = ""
+            
         }
     }
     

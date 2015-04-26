@@ -35,7 +35,7 @@ class UAPinInfoVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     
 //TODO:
     func hasImageForIndexPath(indexPath: NSIndexPath) -> Bool {
-        return (imagePath == "") ? false : true
+        return (annotation.paths[indexPath.row] == "") ? false : true
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -56,7 +56,7 @@ class UAPinInfoVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     
 //TODO:
     func setImageForCell(cell:UAImageCell, indexPath:NSIndexPath) {
-        let item: String = imagePath
+        let item: String = annotation.paths[indexPath.row]
         cell.photoView.image = nil
         if let url = NSURL(string: item) {
             if didAppear {
