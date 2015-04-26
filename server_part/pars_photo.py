@@ -2,7 +2,9 @@ from instagram.client import InstagramAPI
 from string import find
 from time import time
 from record import *
-
+import requests
+import urllib2
+import json
 #access_token = "1693106172.b2eb1f7.1182a054c2854a8cb7487ad39f19ef7d"
 #api = InstagramAPI(access_token=access_token)
 #https://api.instagram.com/v1/media/search?lat=55.756168&lng=37.621852&count=100000&min_timestamp=1429992000&max_timestamp=1430006400&access_token=1693106172.b2eb1f7.1182a054c2854a8cb7487ad39f19ef7d
@@ -46,15 +48,40 @@ def get_lng(string):
     lng = string[i+2:j]
     return lng
 
-def send_to_server(media):
+def send_to_server(post, weight):
     record = Record()
-    record.latitude = get_lat(str(media.location.point))
-    record.longitude = get_lng(str(media.location.point))
-    if media.caption:
-        record.message = media.caption.text.encode('utf-8')
-    record.url = media.images["standard_resolution"].url
+    record.latitude = post["location"]["latitude"]
+    record.longitude = post["location"]["longitude"]
+    if post.caption:
+        record.message = post["caption"]["text"].encode('utf-8')
+    record.url = post["images"]["standard_resolution"]["url"]
     record.time = time()
+    record.weight = weight
     set_record(record)
+
+
+def parse_info2(center_lat, center_lng, resent_media, radius, i):
+    instagram_url = "https://api.instagram.com/v1/media/search?"
+    instagram_url = instagram_url + "lng=" + str(center_lng)
+    instagram_url = instagram_url + "&lat=" + str(center_lat)
+    instagram_url = instagram_url + "&count=" + str(100000)
+    instagram_url = instagram_url + "&min_timestamp=" + str(1429992000)
+    instagram_url = instagram_url + "&access_token=" + str("1693106172.b2eb1f7.1182a054c2854a8cb7487ad39f19ef7d")
+    encoded_data = urllib2.urlopen(instagram_url).read()
+    data = json.loads(encoded_data)["data"]
+    print data
+    for post in data:
+        print "--------"
+        print post["created_time"]
+        print post["images"]["standard_resolution"]["url"]
+        #print "likes = "+ str(media.likes) + " count = " + str(len(media.likes)) + "\n"
+        if post["location"]:
+            lat = post["location"]["latitude"]
+            lng = post["location"]["longitude"]
+            weight = 300.0/(data[-1]["created_time"] - data[0]["created_time"])*100
+            if weight < 0:
+                weight = -weight
+            send_to_server(post, weight)
 
 def parse_info(center_lat, center_lng, resent_media, radius, i):
     for media in resent_media:
@@ -75,7 +102,7 @@ def cover_area( lat1,lng1,lat2,lng2,radius,min_timestamp,max_timestamp):
     while ( tmp_lng < lng2 ):
         while( tmp_lat < lat2):
             resent_media = api.media_search(count="100", lat=str(tmp_lat), lng=str(tmp_lng), min_timestamp=str(min_timestamp), max_timestamp=str(max_timestamp),distance=str(radius))
-            parse_info(tmp_lat, tmp_lng, resent_media, radius, i)
+            parse_info2(tmp_lat, tmp_lng, resent_media, radius, i)
             tmp_lat = tmp_lat + step(radius)
             i = i + 1
         tmp_lat = lat1
