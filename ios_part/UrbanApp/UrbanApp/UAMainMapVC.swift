@@ -18,28 +18,40 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     @IBOutlet weak var mapView: MKMapView!
     var locationManager = CLLocationManager()
-    var pins = [Pin]()
+    var areas = [Area]()
+    var tapRecognizer: UITapGestureRecognizer?
     
     func parseJSON(data: NSData){
         var error: NSError?
+        
+    
         let jsonObject: AnyObject! = NSJSONSerialization.JSONObjectWithData(data,
-            options: NSJSONReadingOptions(0), error: &error)
+            options: NSJSONReadingOptions.MutableLeaves, error: &error)
+        if let err = error {
+            print("ERROR: \(error?.description)\n")
+        }
         
         if let jsonObject = jsonObject as? [String: AnyObject] where error == nil,
             let jsonData = JSONValue.fromObject(jsonObject)?["data"]?.array {
+                print("JSON: OK\n")
                 for pinJSON in jsonData {
-                    var pin = Pin(json: pinJSON)
-                    print("\(self.pins.count): \(pin.subtitle)\n")
-                    self.pins.append(pin)
+                    var area = Area(json: pinJSON)
+                    print("\(self.areas.count): \(area.circle.subtitle)\n")
+                    self.areas.append(area)
                 }
-        }
+            }
+    
     }
 
     func updateMap() {
         dispatch_async(dispatch_get_main_queue(), { [weak self] Void -> Void in
             if let strongSelf = self {
-                strongSelf.mapView.removeAnnotations(strongSelf.pins)
-                strongSelf.mapView.addAnnotations(strongSelf.pins)
+                for area in strongSelf.areas{
+                    strongSelf.mapView.removeAnnotation(area.circle)
+                    strongSelf.mapView.addAnnotation(area.circle)
+                    strongSelf.mapView.removeOverlay(area.circle)
+                    strongSelf.mapView.addOverlay(area.circle)
+                }
             }
             })
     }
@@ -65,9 +77,37 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         task.resume()
     }
     
+    func handleGesture(){
+        var tapPoint = tapRecognizer!.locationInView(mapView)
+        var tapCoord = mapView.convertPoint(tapPoint, toCoordinateFromView: mapView)
+        var tapLocation = CLLocation(latitude: tapCoord.latitude, longitude: tapCoord.longitude)
+        print("tap:\t\(tapCoord.latitude)\t\(tapCoord.longitude)\n")
+        if areas.count > 0 {
+            mapView.selectAnnotation(areas[0].circle, animated: true)
+            print("success\n")
+        }
+        var rect = mapView.visibleMapRect
+        var points = mapView.annotationsInMapRect(rect)
+        for point in points {
+            if let point = point as? MKAnnotation{
+                print("point: \(point.title!)\n")
+                var location = CLLocation(latitude: point.coordinate.latitude, longitude: point.coordinate.longitude)
+                if location.distanceFromLocation(tapLocation) < 500 {
+                    print("Bingo!\n")
+                }
+            }
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("handleGesture"))
+        mapView!.addGestureRecognizer(tapRecognizer!)
+        tapRecognizer?.delaysTouchesBegan = false
+        tapRecognizer?.delaysTouchesEnded = false
+        tapRecognizer?.cancelsTouchesInView = false
         loadInitialData()
     }
     
