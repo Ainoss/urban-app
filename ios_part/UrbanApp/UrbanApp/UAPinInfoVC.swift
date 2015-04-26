@@ -34,13 +34,26 @@ class UAPinInfoVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         return annotation.messages.count;
     }
     
+//TODO:
+    func hasImageForIndexPath(indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UATextCell = self.tableView.dequeueReusableCellWithIdentifier("cell1", forIndexPath: indexPath) as! UATextCell
-        cell.timeText.text = annotation.messages[indexPath.indexAtPosition(0)]
-        cell.messageText.text = annotation.messages[indexPath.indexAtPosition(1)]
-//        println(indexPath.indexAtPosition(1))
-//        println(cell.messageText.text)
-        return cell
+        if hasImageForIndexPath(indexPath) {
+            var cell: UAImageCell = self.tableView.dequeueReusableCellWithIdentifier("cell2", forIndexPath: indexPath) as! UAImageCell
+            cell.timeText.text = annotation.messages[indexPath.indexAtPosition(0)]
+            cell.messageText.text = annotation.messages[indexPath.indexAtPosition(1)]
+            //TODO: do image
+            return cell
+        } else {
+            var cell: UATextCell = self.tableView.dequeueReusableCellWithIdentifier("cell1", forIndexPath: indexPath) as! UATextCell
+            cell.timeText.text = annotation.messages[indexPath.indexAtPosition(0)]
+            cell.messageText.text = annotation.messages[indexPath.indexAtPosition(1)]
+            //        println(indexPath.indexAtPosition(1))
+            //        println(cell.messageText.text)
+            return cell
+        }
     }
     
 }

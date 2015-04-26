@@ -21,6 +21,7 @@
 		6D3E8B031AEBBB8F00006220 /* PublicArt.json in Resources */ = {isa = PBXBuildFile; fileRef = 6D3E8B021AEBBB8F00006220 /* PublicArt.json */; };
 		6D3E8B051AEBFB6500006220 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D3E8B041AEBFB6500006220 /* CoreLocation.framework */; };
 		6D3E8B071AEC231B00006220 /* UAPinInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E8B061AEC231B00006220 /* UAPinInfoVC.swift */; };
+		6DCF34E61AEC60A50070A802 /* UAImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCF34E51AEC60A50070A802 /* UAImageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		6D3E8B021AEBBB8F00006220 /* PublicArt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PublicArt.json; sourceTree = "<group>"; };
 		6D3E8B041AEBFB6500006220 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6D3E8B061AEC231B00006220 /* UAPinInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UAPinInfoVC.swift; sourceTree = "<group>"; };
+		6DCF34E51AEC60A50070A802 /* UAImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UAImageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				6D3E8AFA1AEBB6D300006220 /* VCMapView.swift */,
 				6D3E8AFE1AEBB9E500006220 /* JSON.swift */,
 				6D1316991AEC43AB005263C0 /* UATextCell.swift */,
+				6DCF34E51AEC60A50070A802 /* UAImageCell.swift */,
 				6D3E8ADC1AEB9FA200006220 /* Main.storyboard */,
 				6D3E8ADF1AEB9FA200006220 /* Images.xcassets */,
 				6D3E8AE11AEB9FA200006220 /* LaunchScreen.xib */,
@@ -244,6 +247,7 @@
 				6D3E8AFB1AEBB6D300006220 /* VCMapView.swift in Sources */,
 				6D13169A1AEC43AB005263C0 /* UATextCell.swift in Sources */,
 				6D3E8ADB1AEB9FA200006220 /* UAMainMapVC.swift in Sources */,
+				6DCF34E61AEC60A50070A802 /* UAImageCell.swift in Sources */,
 				6D3E8AD91AEB9FA200006220 /* AppDelegate.swift in Sources */,
 				6D3E8AFF1AEBB9E500006220 /* JSON.swift in Sources */,
 			);
