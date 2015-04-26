@@ -27,4 +27,13 @@ def remove_old_records():
         num += 1
     records = records[num:]
 
+def save_records():
+    f = open("my_records.txt", "w")
+    f.write(str(json.dumps(records)))
+
+def load_records():
+    f = open("my_records.txt", "r")
+    f.read(tmp)
+    global records
+    records = json.loads(tmp)
 

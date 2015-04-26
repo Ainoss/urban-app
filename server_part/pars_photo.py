@@ -94,12 +94,21 @@ def parse_info(center_lat, center_lng, resent_media, radius, i):
 
 def cover_area( lat1,lng1,lat2,lng2,radius,min_timestamp,max_timestamp):
     i = 0
-    api = InstagramAPI(client_id='b2eb1f7863244ca2b8ae463810be93c7', client_secret='0c0f0f2bc28c4181a188d006243a0679')
+
+    try:
+        api = InstagramAPI(client_id='b2eb1f7863244ca2b8ae463810be93c7', client_secret='0c0f0f2bc28c4181a188d006243a0679')
+    except:
+        print 'Instagram init'
+    
     tmp_lat = lat1
     tmp_lng = lng1
     while ( tmp_lng < lng2 ):
         while( tmp_lat < lat2):
-            resent_media = api.media_search(count="100", lat=str(tmp_lat), lng=str(tmp_lng), min_timestamp=str(min_timestamp), max_timestamp=str(max_timestamp),distance=str(radius))
+            try:
+                resent_media = api.media_search(count="100", lat=str(tmp_lat), lng=str(tmp_lng), min_timestamp=str(min_timestamp), max_timestamp=str(max_timestamp),distance=str(radius))
+            except:
+                print 'Instagram iteration'
+
             parse_info2(tmp_lat, tmp_lng, resent_media, radius, i)
             tmp_lat = tmp_lat + step(radius)
             i = i + 1

@@ -17,9 +17,15 @@ def start_getting_tweets():
     consumer_secret = "AfNy0WptjYQII5nb5DOSUEYSZvfoQnZc8nQXt4HmrUx5PwL9cP"
     access_token_key = "3204574607-Pu29CZKs2uo7VE50pOjI0A12w2v12MtZSGIYoro"
     access_token_secret = "0czZF7E6IopZQF3OBAKkKUdRWCKUhT2XBLVD7NHxcxlV6"
-    api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_secret)
+    try:
+        api = TwitterAPI(consumer_key, consumer_secret, access_token_key, access_token_secret)
+    except:
+        print 'Twitter init'
+    try:
+        r = api.request('statuses/filter', {'locations':'37.3,55.5,37.9,55.9'})
+    except:
+        print 'Twitter connection'
 
-    r = api.request('statuses/filter', {'locations':'37.3,55.5,37.9,55.9'})
     for item in r.get_iterator():
         print "TWEET"
         if 'coordinates' in item:

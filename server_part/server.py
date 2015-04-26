@@ -48,8 +48,14 @@ class EchoRequestHandler(SocketServer.BaseRequestHandler):
 
 server = MyTCPServer(('0.0.0.0', 80), EchoRequestHandler)
 #server = MyTCPServer(('10.80.7.23', 80), SimpleHTTPRequestHandler)
-t1 = Thread(target=start_getting_tweets, args=())
-t2 = Thread(target=start_getting_photos, args=())
-t1.start()
-t2.start()
-server.serve_forever()
+try:
+    t1 = Thread(target=start_getting_tweets, args=())
+    t2 = Thread(target=start_getting_photos, args=())
+except:
+    print 'Init of server or threads problem'
+else:
+    t1.start()
+    t2.start()
+    server.serve_forever()
+
+
