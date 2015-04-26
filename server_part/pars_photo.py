@@ -69,12 +69,7 @@ def parse_info2(center_lat, center_lng, resent_media, radius, i):
     instagram_url = instagram_url + "&access_token=" + str("1693106172.b2eb1f7.1182a054c2854a8cb7487ad39f19ef7d")
     encoded_data = urllib2.urlopen(instagram_url).read()
     data = json.loads(encoded_data)["data"]
-    print data
     for post in data:
-        print "--------"
-        print post["created_time"]
-        print post["images"]["standard_resolution"]["url"]
-        #print "likes = "+ str(media.likes) + " count = " + str(len(media.likes)) + "\n"
         if post["location"]:
             lat = post["location"]["latitude"]
             lng = post["location"]["longitude"]

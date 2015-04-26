@@ -20,10 +20,10 @@ def remove_old_records():
     global records
     if len(records) == 0:
         return
-    old_time = 3600
+    old_time = 3600.0
     num = 0
     curr_time = time()
-    while curr_time - records[num].time > old_time:
+    while curr_time - float(records[num].time) > old_time:
         num += 1
     records = records[num:]
 

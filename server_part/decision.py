@@ -26,15 +26,11 @@ def make_decision(  ):
             j = int(floor((y - min_long) / step_long))
             map_data[i][j].append(twit)
             weight_data[i][j] += twit.weight
-            if (len(weight_data[i][j]) > 2):
-                print i, j, "interesting!"
-            else:
-                print i, j, "will be interesting soon.."
             
     array_of_interesting_places = []
     for x in range(0,grid_lat_size):
         for y in range(0,grid_long_size):
-            if ( len(map_data[x][y]) > 0):
+            if weight_data[x][y] > 0:
                 interesting_place = {}
                 lat_long = get_average_lat_long(map_data[x][y])
                 interesting_place["latitude"] = str(lat_long["latitude"])
@@ -42,9 +38,10 @@ def make_decision(  ):
                 interesting_place["messages"] = []
                 interesting_place["size"] = len(map_data[x][y])
                 for twit in map_data[x][y]:
-                    interesting_place["messages"].append( str(twit.message.encode('utf-8') ) )
+                    if len(twit.message) < 1:
+                        interesting_place["messages"].append( str(twit.message.encode('utf-8') ) )
                 array_of_interesting_places.append(interesting_place)
-    remove_old_records()
+    #remove_old_records()
     return array_of_interesting_places
 
 def get_average_lat_long( twits ):
