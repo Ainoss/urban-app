@@ -17,6 +17,7 @@ step_long = (max_long - min_long) / float(grid_long_size)
 def make_decision(  ):
     twits = get_records()
     map_data = [[[] for x in range(grid_lat_size)] for x in range(grid_long_size)]
+    weight_data = [[0 for x in range(grid_lat_size)] for x in range(grid_long_size)]
     for twit in twits:
         x = twit.latitude
         y = twit.longitude
@@ -24,7 +25,8 @@ def make_decision(  ):
             i = int(floor((x - min_lat) / step_lat))
             j = int(floor((y - min_long) / step_long))
             map_data[i][j].append(twit)
-            if (len(map_data[i][j]) > 2):
+            weight_data[i][j] += twit.weight
+            if (len(weight_data[i][j]) > 2):
                 print i, j, "interesting!"
             else:
                 print i, j, "will be interesting soon.."
