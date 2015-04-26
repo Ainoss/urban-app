@@ -1,12 +1,16 @@
 from instagram.client import InstagramAPI
 from string import find
-
+import requests
+import urllib2
+import json
 #access_token = "1693106172.b2eb1f7.1182a054c2854a8cb7487ad39f19ef7d"
 #api = InstagramAPI(access_token=access_token)
-#https://api.instagram.com/v1/media/search?lat=55.756168&lng=37.621852&count=100000&min_timestamp=1429992000&max_timestamp=1430006400&access_token=1693106172.b2eb1f7.1182a054c2854a8cb7487ad39f19ef7d
-
 
 #def coverage_area(lat1,lng1,lat2,lng2):
+
+
+
+
 
 one_meter_in_degrees = 0.000014
 
@@ -47,6 +51,38 @@ def get_lng(string):
 def send_to_server(media):
     return
 
+#inst_url = "https://api.instagram.com/v1/media/search?lat=55.756168&lng=37.621852&count=100000&min_timestamp=1429992000&max_timestamp=1430006400&access_token=1693106172.b2eb1f7.1182a054c2854a8cb7487ad39f19ef7d"
+
+
+def parse_info2(center_lat, center_lng, resent_media, radius, i):
+    instagram_url = "https://api.instagram.com/v1/media/search?"
+    instagram_url = instagram_url + "lng=" + str(center_lng)
+    instagram_url = instagram_url + "&lat=" + str(center_lat)
+    instagram_url = instagram_url + "&count=" + str(100000)
+    instagram_url = instagram_url + "&min_timestamp=" + str(1429992000)
+    instagram_url = instagram_url + "&access_token=" + str("1693106172.b2eb1f7.1182a054c2854a8cb7487ad39f19ef7d")
+    encoded_data = urllib2.urlopen(instagram_url).read()
+    data = json.loads(encoded_data)["data"]
+    print data
+    for post in data:
+        print "--------"
+        print post["created_time"]
+        print post["images"]["standard_resolution"]["url"]
+        #print "likes = "+ str(media.likes) + " count = " + str(len(media.likes)) + "\n"
+        if post["location"]:
+            lat = post["location"]["latitude"]
+            lng = post["location"]["longitude"]
+            #if is_no_out_of_range(lat, lng, center_lat, center_lng, radius):
+            #    if media.caption:
+            #        hashtags = media.caption.text.encode("utf-8")
+            #        print hashtags
+            #        for tag in hashtags.split(): 
+            #            if tag.startswith("#"):
+            #                f.write("tag = " + tag + '\n')
+            #                m.write("tag = " + tag + '\n')
+            #                print "tag = " + tag
+
+
 def parse_info(center_lat, center_lng, resent_media, radius, i):
     m = open(str(i), "a")
     f = open("hashtags.txt", "a")
@@ -80,7 +116,7 @@ def cover_area( lat1,lng1,lat2,lng2,radius,min_timestamp,max_timestamp):
     while ( tmp_lng < lng2 ):
         while( tmp_lat < lat2):
             resent_media = api.media_search(count="100", lat=str(tmp_lat), lng=str(tmp_lng), min_timestamp=str(min_timestamp), max_timestamp=str(max_timestamp),distance=str(radius))
-            parse_info(tmp_lat, tmp_lng, resent_media, radius, i)
+            parse_info2(tmp_lat, tmp_lng, resent_media, radius, i)
             tmp_lat = tmp_lat + step(radius)
             i = i + 1
             print "n = " + str(i) + "\n"
