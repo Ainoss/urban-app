@@ -6,6 +6,7 @@ class Record:
     message = ""
     time = 0.0
     url = ""
+    weight = 1
 
 records = []
 
