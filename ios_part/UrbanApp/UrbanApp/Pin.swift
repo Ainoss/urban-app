@@ -42,11 +42,9 @@ class Pin: NSObject, MKAnnotation {
         for msg in messagesData {
             if (cnt % 2) == 0 {
                 messages.append(msg.string!)
-                println(msg.string!)
             }
             else {
                 paths.append(msg.string!)
-                println(msg.string!)
             }
             cnt++
         }

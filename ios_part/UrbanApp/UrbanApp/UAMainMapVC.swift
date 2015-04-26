@@ -8,12 +8,13 @@
 
 import UIKit
 import MapKit
-let UAMetersPerLine: Double = 100000
+let UAMetersPerLine: Double = 50000
 
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
     var chosenAnnotation: Pin!
 
+    @IBOutlet weak var refreshButton: UIButton!
     @IBAction func unwindToMainMapVC(sender: UIStoryboardSegue) {
     }
     @IBOutlet weak var mapView: MKMapView!
@@ -40,13 +41,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             if let strongSelf = self {
                 strongSelf.mapView.removeAnnotations(strongSelf.pins)
                 strongSelf.mapView.addAnnotations(strongSelf.pins)
+                strongSelf.refreshButton.hidden = false
             }
             })
     }
     
     func loadInitialData() {
         var URL = NSURL(string: "http://10.80.7.23:80/")
-//        var URL = NSURL(string: "https://data.honolulu.gov/api/views/yef5-h88r/rows.json?accessType=DOWNLOAD");
         let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
         let task = session.dataTaskWithURL(URL!, completionHandler:{ [weak self] (data, response, error) -> Void in
@@ -65,6 +66,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         task.resume()
     }
     
+    
+    @IBAction func refreshButtonPressed(sender: AnyObject) {
+        refreshButton.hidden = true
+        loadInitialData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -73,6 +80,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.refreshButton.hidden = true
         //Moscow
         var zoomLocation = CLLocationCoordinate2D(latitude: 55.75, longitude: 37.6)
         //example city Honolulu with red points

@@ -21,9 +21,35 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYh-Lm-R0m">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bc0-kc-MNW">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="53" id="aY6-wr-ji4"/>
+                                    <constraint firstAttribute="height" constant="30" id="wfk-6X-wDL"/>
+                                </constraints>
+                                <state key="normal" title="Refresh">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="aY6-wr-ji4"/>
+                                        <exclude reference="wfk-6X-wDL"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="aY6-wr-ji4"/>
+                                        <include reference="wfk-6X-wDL"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="refreshButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C1O-yl-51K"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="bc0-kc-MNW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="9us-3v-etn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gYh-Lm-R0m" secondAttribute="trailing" constant="-16" id="ArO-es-fLM"/>
                             <constraint firstItem="gYh-Lm-R0m" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="CAU-aI-dxW"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gYh-Lm-R0m" secondAttribute="bottom" id="Dba-MF-7G6"/>
@@ -32,12 +58,16 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gYh-Lm-R0m" secondAttribute="bottom" id="KJi-Kz-SsA"/>
                             <constraint firstItem="gYh-Lm-R0m" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="MOd-cs-Yta"/>
                             <constraint firstItem="gYh-Lm-R0m" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="TtH-Wp-G2M"/>
+                            <constraint firstItem="bc0-kc-MNW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="a3w-J6-LVf"/>
                             <constraint firstItem="gYh-Lm-R0m" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="dKV-Qx-6UM"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gYh-Lm-R0m" secondAttribute="bottom" id="hJz-OB-QYc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gYh-Lm-R0m" secondAttribute="trailing" constant="-16" id="jZQ-xB-MRi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gYh-Lm-R0m" secondAttribute="trailing" id="nXj-QW-uja"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="bc0-kc-MNW"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="ArO-es-fLM"/>
                                 <exclude reference="CAU-aI-dxW"/>
@@ -45,13 +75,25 @@
                                 <exclude reference="TtH-Wp-G2M"/>
                                 <exclude reference="dKV-Qx-6UM"/>
                                 <exclude reference="nXj-QW-uja"/>
+                                <exclude reference="9us-3v-etn"/>
+                                <exclude reference="a3w-J6-LVf"/>
                                 <exclude reference="Dba-MF-7G6"/>
                                 <exclude reference="hJz-OB-QYc"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="bc0-kc-MNW"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="9us-3v-etn"/>
+                                <include reference="a3w-J6-LVf"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="gYh-Lm-R0m" id="trD-gt-f2l"/>
+                        <outlet property="refreshButton" destination="bc0-kc-MNW" id="mPL-xP-Lyz"/>
                         <segue destination="x3t-df-pZS" kind="show" identifier="showPinInformation" id="i0d-lb-Zew"/>
                     </connections>
                 </viewController>
@@ -177,15 +219,24 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="88" y="43" width="214" height="114"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mk5-z4-Viq">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="88" y="18" width="184" height="21"/>
+                                                    </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z6m-SQ-Fz4">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="10" y="10" width="60" height="155"/>
+                                                    </variation>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
