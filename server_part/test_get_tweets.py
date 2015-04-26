@@ -4,6 +4,13 @@ from TwitterAPI import TwitterAPI
 from record import *
 from decision import *
 from time import time
+import json
+
+data_to_send = "Init"
+
+def get_data_to_send():
+    global data_to_sand
+    return data_to_send
 
 def start_getting_tweets():
     consumer_key = "KCZCsNS4OKwguAnnlZWUXXgI4"
@@ -15,7 +22,6 @@ def start_getting_tweets():
     r = api.request('statuses/filter', {'locations':'37.3,55.5,37.9,55.9'})
     for item in r.get_iterator():
         print "TWEET"
-        make_decision()
         if 'coordinates' in item:
             if item['coordinates']:
                 record = Record()
@@ -24,6 +30,12 @@ def start_getting_tweets():
                 record.message = item['text']
                 record.time = time();
                 set_record(record)
+        array = make_decision()
+        tmp = {"data": array}
+        tmp = json.dumps(tmp) + '\n'
+        tmp = '{"data":\n' + tmp[ len('{"data":\n') :]
+        global data_to_send
+        data_to_send = tmp
 
 #if __name__ == '__main__':
 #    start_getting_tweets()
