@@ -52,10 +52,10 @@ def send_to_server(post, weight):
     record = Record()
     record.latitude = post["location"]["latitude"]
     record.longitude = post["location"]["longitude"]
-    if post.caption:
+    if post["caption"]:
         record.message = post["caption"]["text"].encode('utf-8')
     record.url = post["images"]["standard_resolution"]["url"]
-    record.time = time()
+    record.time = post["created_time"]
     record.weight = weight
     set_record(record)
 
