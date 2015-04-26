@@ -184,7 +184,7 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z6m-SQ-Fz4">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z6m-SQ-Fz4">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                 </imageView>
                                             </subviews>
@@ -208,10 +208,6 @@
                                                     <exclude reference="z6m-SQ-Fz4"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="0rg-eb-qsC"/>
-                                                    <exclude reference="84k-Ba-Fr1"/>
-                                                    <exclude reference="DDC-TX-1eY"/>
-                                                    <exclude reference="se3-hD-PTx"/>
                                                     <exclude reference="PR9-95-2nj"/>
                                                     <exclude reference="RSd-zr-9NE"/>
                                                     <exclude reference="bYA-wA-1ad"/>
@@ -219,6 +215,10 @@
                                                     <exclude reference="9Bx-Sr-5VI"/>
                                                     <exclude reference="L9J-Hp-q6x"/>
                                                     <exclude reference="SK6-Ba-gbD"/>
+                                                    <exclude reference="0rg-eb-qsC"/>
+                                                    <exclude reference="84k-Ba-Fr1"/>
+                                                    <exclude reference="DDC-TX-1eY"/>
+                                                    <exclude reference="se3-hD-PTx"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
@@ -228,10 +228,6 @@
                                                     <include reference="z6m-SQ-Fz4"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="0rg-eb-qsC"/>
-                                                    <include reference="84k-Ba-Fr1"/>
-                                                    <include reference="DDC-TX-1eY"/>
-                                                    <include reference="se3-hD-PTx"/>
                                                     <include reference="PR9-95-2nj"/>
                                                     <include reference="RSd-zr-9NE"/>
                                                     <include reference="bYA-wA-1ad"/>
@@ -239,6 +235,10 @@
                                                     <include reference="9Bx-Sr-5VI"/>
                                                     <include reference="L9J-Hp-q6x"/>
                                                     <include reference="SK6-Ba-gbD"/>
+                                                    <include reference="0rg-eb-qsC"/>
+                                                    <include reference="84k-Ba-Fr1"/>
+                                                    <include reference="DDC-TX-1eY"/>
+                                                    <include reference="se3-hD-PTx"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

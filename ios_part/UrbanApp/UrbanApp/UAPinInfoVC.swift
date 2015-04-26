@@ -12,8 +12,8 @@ class UAPinInfoVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     var annotation: Pin!
     var didAppear: Bool = false
     @IBOutlet weak var tableView: UITableView!
-    var imagePath = ""
-//    var imagePath = "http://cdn2.raywenderlich.com/wp-content/uploads/2014/05/RWImageCell-Final-Pins.jpg"
+//    var imagePath = ""
+    var imagePath = "https://d25l0qqym3malo.cloudfront.net/engines/im/images/logo.png"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +50,7 @@ class UAPinInfoVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
         let cell = tableView.dequeueReusableCellWithIdentifier("imageCell") as! UAImageCell
         setTimeForCell(cell, indexPath: indexPath)
         setMessageForCell(cell, indexPath: indexPath)
+        setImageForCell(cell, indexPath: indexPath)
         return cell
     }
     
@@ -57,7 +58,7 @@ class UAPinInfoVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     func setImageForCell(cell:UAImageCell, indexPath:NSIndexPath) {
         let item: String = imagePath
         cell.photoView.image = nil
-        if let url = NSURL(fileURLWithPath: item) {
+        if let url = NSURL(string: item) {
             if didAppear {
                 cell.photoView.setImageWithURL(url)
             }
@@ -77,7 +78,7 @@ class UAPinInfoVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     }
     
     func setTimeForCell(cell:UATextCell, indexPath:NSIndexPath) {
-        let item = annotation.messages[indexPath.indexAtPosition(0)] as String
+        let item = annotation.title as String
         cell.timeText.text = didAppear ? (item ?? "[No Title]") : ""
     }
 
