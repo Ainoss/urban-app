@@ -8,8 +8,6 @@
 
 import UIKit
 
-class UAImageCell: UITableViewCell {
-    @IBOutlet weak var timeText: UILabel!
-    @IBOutlet weak var messageText: UILabel!
+class UAImageCell: UATextCell {
     @IBOutlet weak var photoView: UIImageView!
 }

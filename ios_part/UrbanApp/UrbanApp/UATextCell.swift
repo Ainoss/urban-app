@@ -9,6 +9,6 @@
 import UIKit
 
 class UATextCell: UITableViewCell {
-    @IBOutlet weak var messageText: UILabel!
     @IBOutlet weak var timeText: UILabel!
+    @IBOutlet weak var messageText: UILabel!
 }
