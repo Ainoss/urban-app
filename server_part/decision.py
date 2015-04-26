@@ -8,8 +8,8 @@ min_long = 37.3
 max_lat = 55.9
 min_lat = 55.5
 
-grid_lat_size = 3
-grid_long_size = 3
+grid_lat_size = 14
+grid_long_size = 14
 step_lat = (max_lat - min_lat) / float(grid_lat_size)
 step_long = (max_long - min_long) / float(grid_long_size)
 
@@ -17,7 +17,8 @@ step_long = (max_long - min_long) / float(grid_long_size)
 def make_decision(  ):
     twits = get_records()
     map_data = [[[] for x in range(grid_lat_size)] for x in range(grid_long_size)]
-    weight_data = [[0 for x in range(grid_lat_size)] for x in range(grid_long_size)]
+    weight_data = [[0.0 for x in range(grid_lat_size)] for x in range(grid_long_size)]
+    max_weight = 0.0
     for twit in twits:
         x = twit.latitude
         y = twit.longitude
@@ -26,11 +27,13 @@ def make_decision(  ):
             j = int(floor((y - min_long) / step_long))
             map_data[i][j].append(twit)
             weight_data[i][j] += twit.weight
+            max_weight = max(max_weight, weight_data[i][j])
+            print max_weight
             
     array_of_interesting_places = []
     for x in range(0,grid_lat_size):
         for y in range(0,grid_long_size):
-            if weight_data[x][y] > 0:
+            if weight_data[x][y] > max_weight * 0.5:
                 interesting_place = {}
                 lat_long = get_average_lat_long(map_data[x][y])
                 interesting_place["latitude"] = str(lat_long["latitude"])
