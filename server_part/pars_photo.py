@@ -1,5 +1,7 @@
 from instagram.client import InstagramAPI
 from string import find
+from time import time
+from record import *
 
 #access_token = "1693106172.b2eb1f7.1182a054c2854a8cb7487ad39f19ef7d"
 #api = InstagramAPI(access_token=access_token)
@@ -45,31 +47,24 @@ def get_lng(string):
     return lng
 
 def send_to_server(media):
-    return
+    record = Record()
+    record.latitude = get_lat(str(media.location.point))
+    record.longitude = get_lng(str(media.location.point))
+    if media.caption:
+        record.message = media.caption.text.encode('utf-8')
+    record.url = media.images["standard_resolution"].url
+    record.time = time()
+    set_record(record)
 
 def parse_info(center_lat, center_lng, resent_media, radius, i):
-    m = open(str(i), "a")
-    f = open("hashtags.txt", "a")
     for media in resent_media:
-        print "--------"
-        print media.created_time
-        m.write(str(media.created_time) + '\n' + str(media.images["standard_resolution"].url) + '\n')
-        print media.images["standard_resolution"].url
-        print "likes = "+ str(media.likes) + " count = " + str(len(media.likes)) + "\n"
         if media.location:
             lat = get_lat(str(media.location.point))
             lng = get_lng(str(media.location.point))
             if is_no_out_of_range(lat, lng, center_lat, center_lng, radius):
-                #send_to_server(media)
-                f.write("lat = " + lat + '\n' + "lng = " + lng  + '\n')
+                send_to_server(media)
                 if media.caption:
                     hashtags = media.caption.text.encode("utf-8")
-                    print hashtags
-                    for tag in hashtags.split(): 
-                        if tag.startswith("#"):
-                            f.write("tag = " + tag + '\n')
-                            m.write("tag = " + tag + '\n')
-                            print "tag = " + tag
 
 
 def cover_area( lat1,lng1,lat2,lng2,radius,min_timestamp,max_timestamp):
@@ -83,25 +78,26 @@ def cover_area( lat1,lng1,lat2,lng2,radius,min_timestamp,max_timestamp):
             parse_info(tmp_lat, tmp_lng, resent_media, radius, i)
             tmp_lat = tmp_lat + step(radius)
             i = i + 1
-            print "n = " + str(i) + "\n"
         tmp_lat = lat1
         tmp_lng = tmp_lng + step(radius)
 
 
-if __name__ == '__main__':
+def start_getting_photos():
     lat1 = 55.589650 
     lng1 = 37.401545
     lat2 = 55.911938
     lng2 = 37.842371
     radius = 5000
-#    min_timestamp = 1430000000
-#    max_timestamp = 1430000300
 
     min_timestamp = 1429920000
     max_timestamp = 1430000300
     while ( min_timestamp < max_timestamp ):
+        print "PHOTO"
         cover_area( lat1,lng1,lat2,lng2,radius,min_timestamp,min_timestamp + 300)
         min_timestamp = min_timestamp + 300
 
+
+#if __name__ == '__main__':
+#    start_getting_photos()
 
 

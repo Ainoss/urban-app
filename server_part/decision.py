@@ -28,8 +28,7 @@ def make_decision(  ):
                 print i, j, "interesting!"
             else:
                 print i, j, "will be interesting soon.."
-        else:
-            print 'WRONG COORD'
+            
     array_of_interesting_places = []
     for x in range(0,grid_lat_size):
         for y in range(0,grid_long_size):
@@ -42,14 +41,8 @@ def make_decision(  ):
                 interesting_place["size"] = len(map_data[x][y])
                 for twit in map_data[x][y]:
                     interesting_place["messages"].append( str(twit.message.encode('utf-8') ) )
-                    print "encoded"
-                    print  str(twit.message.encode('utf-8') )
                 array_of_interesting_places.append(interesting_place)
-                print "New interesting place added!"
-                print interesting_place["messages"]
-            else:
-                print "Place is not interesting"
-    #ramove_old_records()
+    remove_old_records()
     return array_of_interesting_places
 
 def get_average_lat_long( twits ):
