@@ -20,7 +20,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     var pins = [Pin]()
     
-    func parseJSON(data: NSData){
+    func parseJSON(data: NSData) {
         var error: NSError?
         let jsonObject: AnyObject! = NSJSONSerialization.JSONObjectWithData(data,
             options: NSJSONReadingOptions(0), error: &error)
