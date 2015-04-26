@@ -41,9 +41,7 @@ def make_decision(  ):
                 interesting_place["messages"] = []
                 interesting_place["size"] = len(map_data[x][y])
                 for twit in map_data[x][y]:
-                    interesting_place["messages"].append( str(twit.message.encode('utf-8') ) )
-                    print "encoded"
-                    print  str(twit.message.encode('utf-8') )
+                    interesting_place["messages"].append( str(twit.message.encode('utf-8') ).encode('utf-8') )
                 array_of_interesting_places.append(interesting_place)
                 print "New interesting place added!"
                 print interesting_place["messages"]
