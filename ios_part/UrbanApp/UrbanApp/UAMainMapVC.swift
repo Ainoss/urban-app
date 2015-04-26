@@ -74,13 +74,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.refreshButton.hidden = true
         mapView.delegate = self
         loadInitialData()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.refreshButton.hidden = true
         //Moscow
         var zoomLocation = CLLocationCoordinate2D(latitude: 55.75, longitude: 37.6)
         //example city Honolulu with red points
