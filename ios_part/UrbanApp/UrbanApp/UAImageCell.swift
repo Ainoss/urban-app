@@ -1,5 +1,5 @@
 //
-//  UATextCell.swift
+//  UAImageCell.swift
 //  UrbanApp
 //
 //  Created by Daniil Sargin on 26/04/15.
@@ -8,7 +8,6 @@
 
 import UIKit
 
-class UATextCell: UITableViewCell {
-    @IBOutlet weak var timeText: UILabel!
-    @IBOutlet weak var messageText: UILabel!
+class UAImageCell: UATextCell {
+    @IBOutlet weak var photoView: UIImageView!
 }

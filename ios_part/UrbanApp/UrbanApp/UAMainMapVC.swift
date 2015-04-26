@@ -59,7 +59,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     strongSelf.updateMap()
                 }
             } else {
-                println("Failure: %@", error!.localizedDescription)
+                println("Failure: \(error!.localizedDescription)")
             }
             })
         task.resume()

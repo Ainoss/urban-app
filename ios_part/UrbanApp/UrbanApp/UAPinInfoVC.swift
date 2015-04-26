@@ -10,8 +10,10 @@ import UIKit
 
 class UAPinInfoVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var annotation: Pin!
-    
+    var didAppear: Bool = false
     @IBOutlet weak var tableView: UITableView!
+//    var imagePath = ""
+    var imagePath = "https://d25l0qqym3malo.cloudfront.net/engines/im/images/logo.png"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,24 +25,62 @@ class UAPinInfoVC: UIViewController, UITableViewDataSource, UITableViewDelegate 
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        didAppear = true
         self.tableView.reloadData()
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return annotation.messages.count;
+        return annotation.messages.count
+    }
+    
+//TODO:
+    func hasImageForIndexPath(indexPath: NSIndexPath) -> Bool {
+        return (imagePath == "") ? false : true
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UATextCell = self.tableView.dequeueReusableCellWithIdentifier("cell1", forIndexPath: indexPath) as! UATextCell
-        cell.timeText.text = annotation.messages[indexPath.indexAtPosition(0)]
-        cell.messageText.text = annotation.messages[indexPath.indexAtPosition(1)]
-//        println(indexPath.indexAtPosition(1))
-//        println(cell.messageText.text)
+        if hasImageForIndexPath(indexPath) {
+            return imageCellAtIndexPath(indexPath)
+        } else {
+            return textCellAtIndexPath(indexPath)
+        }
+    }
+    
+    func imageCellAtIndexPath(indexPath:NSIndexPath) -> UAImageCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("imageCell") as! UAImageCell
+        setTimeForCell(cell, indexPath: indexPath)
+        setMessageForCell(cell, indexPath: indexPath)
+        setImageForCell(cell, indexPath: indexPath)
         return cell
     }
+    
+//TODO:
+    func setImageForCell(cell:UAImageCell, indexPath:NSIndexPath) {
+        let item: String = imagePath
+        cell.photoView.image = nil
+        if let url = NSURL(string: item) {
+            if didAppear {
+                cell.photoView.setImageWithURL(url)
+            }
+        }
+    }
+    
+    func textCellAtIndexPath(indexPath:NSIndexPath) -> UATextCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("textCell") as! UATextCell
+        setTimeForCell(cell, indexPath: indexPath)
+        setMessageForCell(cell, indexPath: indexPath)
+        return cell
+    }
+    
+    func setMessageForCell(cell:UATextCell, indexPath:NSIndexPath) {
+        let item = annotation.messages[indexPath.row] as String
+        cell.messageText.text = didAppear ? (item ?? "[No Title]") : ""
+    }
+    
+    func setTimeForCell(cell:UATextCell, indexPath:NSIndexPath) {
+        let item = annotation.title as String
+        cell.timeText.text = didAppear ? (item ?? "[No Title]") : ""
+    }
+
     
 }
