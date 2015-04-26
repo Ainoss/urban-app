@@ -78,7 +78,10 @@ def parse_info2(center_lat, center_lng, resent_media, radius, i):
         if post["location"]:
             lat = post["location"]["latitude"]
             lng = post["location"]["longitude"]
-            weight = 300.0/(float(data[-1]["created_time"]) - float(data[0]["created_time"]) )*100
+            dt = (float(data[-1]["created_time"]) - float(data[0]["created_time"])
+            if ( dt == 0 ):
+                dt = 100
+            weight = 300.0/(dt)*100
             if weight < 0:
                 weight = -weight
             send_to_server(post, weight)
