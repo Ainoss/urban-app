@@ -8,8 +8,8 @@ min_long = 37.3
 max_lat = 55.9
 min_lat = 55.5
 
-grid_lat_size = 2
-grid_long_size = 2
+grid_lat_size = 3
+grid_long_size = 3
 step_lat = (max_lat - min_lat) / float(grid_lat_size)
 step_long = (max_long - min_long) / float(grid_long_size)
 
@@ -38,8 +38,12 @@ def make_decision(  ):
                 interesting_place["messages"] = []
                 interesting_place["size"] = len(map_data[x][y])
                 for twit in map_data[x][y]:
-                    if len(twit.message) < 1:
-                        interesting_place["messages"].append( str(twit.message.encode('utf-8') ) )
+                    if len(twit.message) > 0:
+                        try:
+                            interesting_place["messages"].append( twit.message.encode('utf-8') )
+                        except:
+                            interesting_place["messages"].append( twit.message )
+                interesting_place["messages"].append("")
                 array_of_interesting_places.append(interesting_place)
     #remove_old_records()
     return array_of_interesting_places

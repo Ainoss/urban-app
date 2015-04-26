@@ -69,6 +69,7 @@ def parse_info2(center_lat, center_lng, resent_media, radius, i):
     instagram_url = instagram_url + "&access_token=" + str("1693106172.b2eb1f7.1182a054c2854a8cb7487ad39f19ef7d")
     encoded_data = urllib2.urlopen(instagram_url).read()
     data = json.loads(encoded_data)["data"]
+    print 'PHOTO'
     for post in data:
         if post["location"]:
             lat = post["location"]["latitude"]
@@ -89,7 +90,7 @@ def parse_info(center_lat, center_lng, resent_media, radius, i):
             if is_no_out_of_range(lat, lng, center_lat, center_lng, radius):
                 send_to_server(media)
                 if media.caption:
-                    hashtags = media.caption.text.encode("utf-8")
+                    hashtags = media.caption.text
 
 
 def cover_area( lat1,lng1,lat2,lng2,radius,min_timestamp,max_timestamp):
@@ -123,12 +124,14 @@ def start_getting_photos():
     lng2 = 37.842371
     radius = 5000
 
-    min_timestamp = 1429920000
+    min_timestamp = 10
     max_timestamp = 1430000300
-    while ( min_timestamp < max_timestamp ):
-        print "PHOTO"
-        cover_area( lat1,lng1,lat2,lng2,radius,min_timestamp,min_timestamp + 300)
-        min_timestamp = min_timestamp + 300
+    while ( 1 ):
+        try:
+            cover_area( lat1,lng1,lat2,lng2,radius,min_timestamp,min_timestamp + 300)
+            min_timestamp = min_timestamp + 300
+        except:
+            print "NO PHOTO"
 
 
 #if __name__ == '__main__':
