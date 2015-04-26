@@ -10,40 +10,37 @@ import Foundation
 import MapKit
 
 class Pin: NSObject, MKAnnotation {
-    let title: String
-    let locationName: String
-    let discipline: String
     let coordinate: CLLocationCoordinate2D
+    let title: String
+    var subtitle: String
+    let locationName: String
+    let locationSize: Int
+    let pinColor: MKPinAnnotationColor = .Red
     
-    init(title: String, locationName: String, discipline: String, coordinate: CLLocationCoordinate2D) {
+    var messages = [String]()
+    
+    init(title: String, subtitle: String, locationName: String, locationSize: Int, coordinate: CLLocationCoordinate2D) {
         self.title = title
+        self.subtitle = "subtitle"
         self.locationName = locationName
-        self.discipline = discipline
         self.coordinate = coordinate
+        self.locationSize = locationSize
         
         super.init()
     }
     
-    class func fromJSON(json: [JSONValue]) -> Pin? {
-        // 1
-        var title: String
-        if let titleOrNil = json[16].string {
-            title = titleOrNil
-        } else {
-            title = ""
+    init(json: JSONValue) {
+        title = "Tweets"
+        subtitle = json["messages"]!.array![0].string!
+        locationName = title
+        locationSize = json["size"]!.integer!
+        let longitude = (json["longitude"]!.string! as NSString).doubleValue
+        let latitude = (json["latitude"]!.string! as NSString).doubleValue
+        coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        var messagesData = json["messages"]!.array!
+        for msg in messagesData {
+            messages.append(msg.string!)
         }
-        let locationName = json[12].string
-        let discipline = json[15].string
-        
-        // 2
-        let latitude = (json[18].string! as NSString).doubleValue
-        let longitude = (json[19].string! as NSString).doubleValue
-        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        
-        // 3
-        return Pin(title: title, locationName: locationName!, discipline: discipline!, coordinate: coordinate)
     }
-    var subtitle: String {
-        return locationName
-    }
+    
 }
